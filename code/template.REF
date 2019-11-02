@@ -1,0 +1,23 @@
+$ENTRY Go { = <Introduction > <Loop >; };
+
+Introduction { =
+     <Prout> <Prout ''/** ____ PROGRAM DESCRIPTION _____ **/>;
+};
+
+Invitation { =  <Prout>
+     <Prout 'Input a string, or \'end\' to terminate: '>;
+};
+
+* Loop: in and out
+* Card: an input string
+Loop { = <Invitation> <Inout <Card> >; }; 
+
+Inout { 
+  'end'   = <Prout 'End of session'>; 
+  e.X = <Out </** ____ FUNCTION CALL _____ **/ e.X >>;
+};      
+
+Out {
+e.1 = <Prout 'Result:'> 
+	   <Prout e.1> <Loop >;
+};

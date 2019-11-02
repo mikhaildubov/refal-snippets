@@ -1,0 +1,44 @@
+$ENTRY Go { = <Introduction > <Loop >; };
+
+Introduction { =
+     <Prout> <Prout 'This program calculates the factorial'>;
+};
+
+Invitation { =  <Prout>
+     <Prout 'Input a number, 0 to terminate: '>;
+};
+
+* Loop: in and out
+* Card: an input string
+Loop { = <Invitation> <Inout <Numb <Card>> >; }; 
+
+Inout { 
+  0   = <Prout 'End of session'>; 
+  s.X = <Out <Fact s.X >>;
+};      
+
+Out {
+s.1 = <Prout 'Result:'> 
+	   <Prout s.1> <Loop >;
+};
+
+********************************
+** Simple recursive Factorial **
+********************************
+Fact {
+	0 = 1;
+	s.Num = <* s.Num <Fact <- s.Num 1>>>;
+};
+
+
+***************************************************
+** Factorial with accumulator and tail recursion **
+***************************************************
+Fact2 {
+	s.Num = <RecFact s.Num 1>;
+};
+
+RecFact {
+	0 s.Acc = s.Acc;
+	s.N s.Acc = <RecFact <- s.N 1> <* s.Acc s.N>>
+};

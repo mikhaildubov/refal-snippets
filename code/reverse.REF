@@ -1,0 +1,44 @@
+$ENTRY Go { = <Introduction > <Loop >; };
+
+Introduction { =
+     <Prout> <Prout 'This program reverses the input string'>;
+};
+
+Invitation { =  <Prout>
+     <Prout 'Input a string, or \'end\' to terminate: '>;
+};
+
+* Loop: in and out
+* Card: an input string
+Loop { = <Invitation> <Inout <Card> >; }; 
+
+Inout { 
+  'end'   = <Prout 'End of session'>; 
+  e.X = <Out <Reverse e.X >>;
+};      
+
+Out {
+e.1 = <Prout 'Result:'> 
+	   <Prout e.1> <Loop >;
+};
+
+********************************
+** Simple recursive Reverse   **
+********************************
+Reverse {
+	/* empty */ = /* empty */;
+	s.Next e.Tail = <Reverse e.Tail> s.Next;
+};
+
+
+*************************************************
+** Reverse with accumulator and tail recursion **
+*************************************************
+Reverse2 {
+	e.String = <RecReverse () e.String>;
+};
+	   
+RecReverse {
+	(e.Reversed) = e.Reversed;
+	(e.Reversed) s.Next e.Tail = <RecReverse (s.Next e.Reversed) e.Tail>;
+};

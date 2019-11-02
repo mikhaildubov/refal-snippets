@@ -1,0 +1,31 @@
+$ENTRY Go { = <Introduction > <Loop >; };
+
+Introduction { =
+     <Prout> <Prout 'This program determines whether the input string is a palindrom'>;
+};
+
+Invitation { =  <Prout>
+     <Prout 'Input a string, or \'end\' to terminate: '>;
+};
+
+* Loop: in and out
+* Card: an input string
+Loop { = <Invitation> <Inout <Card> >; }; 
+
+Inout { 
+  'end'   = <Prout 'End of session'>; 
+  e.X = <Out <Palindrom e.X >>;
+};      
+
+Out {
+e.1 = <Prout 'Result:'> 
+	   <Prout e.1> <Loop >;
+};
+	   
+* Palindrom analysis
+Palindrom {
+     s.1 e.2 s.1 = <Palindrom e.2> ;
+     s.1 = 'True' ;
+     = 'True';
+     e.1 = 'False' ;
+ };

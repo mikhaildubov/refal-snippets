@@ -1,0 +1,45 @@
+$ENTRY Go { = <Introduction > <Loop >; };
+
+Introduction { =
+     <Prout> <Prout 'The program constructs a binary search tree from the array of integers'>;
+};
+
+Invitation { =  <Prout>
+     <Prout 'Input a string - array of integers, or \'end\' to terminate: '>;
+};
+
+* Loop: in and out
+* Card: an input string
+Loop { = <Invitation> <Inout <Card> >; }; 
+
+Inout { 
+  'end'   = <Prout 'End of session'>; 
+  e.X = <Out <BuildTree <NumbList e.X>> >;
+};      
+
+Out {
+e.1 = <Prout 'Result:'> 
+	   <Prout e.1> <Loop >;
+};
+
+NumbList {
+	e.Input = <RecNumbList () e.Input>;
+};
+
+RecNumbList {
+	(e.Numbs) e.Next ' ' e.Tail = <RecNumbList (e.Numbs <Numb e.Next>) e.Tail>;
+	(e.Numbs) e.Next = (e.Numbs <Numb e.Next>);
+};
+
+BuildTree {
+	() e.r = e.r;
+	(s.x e.z) e.r = <BuildTree (e.z) <Insert s.x e.r>>
+};
+
+Insert {
+	s.x = () s.x ();
+	s.x (e.1) s.y (e.2), <Compare s.x s.y>: {
+		'-' = (<Insert s.x e.1>) s.y (e.2);
+		s.c = (e.1) s.y (<Insert s.x e.2>)
+	}
+};
